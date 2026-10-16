@@ -4,7 +4,7 @@ export default class MenuComponent extends Component {
   render() {
     return (
       
-<div className="min-h-screen bg-gray-100">
+
   <header className="bg-slate-900 shadow-lg">
     <div className="mx-auto max-w-7xl px-6 py-5">
 
@@ -40,12 +40,34 @@ export default class MenuComponent extends Component {
         >
           🏢 Coches
         </NavLink>
+        <NavLink
+          to="/create"
+          className={({ isActive }) =>
+            `rounded-lg px-5 py-3 text-sm font-semibold transition-all duration-200 ${
+              isActive
+                ? "bg-blue-600 text-white shadow-md"
+                : "text-slate-300 hover:bg-slate-700 hover:text-white"
+            }`
+          }
+        >
+          🏢 Create Coche
+        </NavLink>
+        <NavLink
+          to="/edit"
+          className={({ isActive }) =>
+            `rounded-lg px-5 py-3 text-sm font-semibold transition-all duration-200 ${
+              isActive
+                ? "bg-blue-600 text-white shadow-md"
+                : "text-slate-300 hover:bg-slate-700 hover:text-white"
+            }`
+          }
+        >
+          🏢 Edit
+        </NavLink>
 
       </nav>
     </div>
   </header>
-</div>
-
     );
   }
 }

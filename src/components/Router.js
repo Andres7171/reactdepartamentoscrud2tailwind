@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MenuComponent from './MenuComponent';
 import HomeComponent from './HomeComponent';
+import CreateCoche from './CreateCoche';
+import EditCoche from './EditCoche';
 
 export default class Router extends Component {
   render() {
@@ -10,6 +12,8 @@ export default class Router extends Component {
       <MenuComponent/>
         <Routes>
             <Route path='/' element={<HomeComponent/>}/>
+            <Route path='/create' element={<CreateCoche/>}/>
+            <Route path='/edit' element={<EditCoche/>}/>
         </Routes>
       </BrowserRouter>
     )

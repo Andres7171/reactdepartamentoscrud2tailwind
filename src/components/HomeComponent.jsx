@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ServiceCoches from "../services/ServiceCoches";
 import { NavLink } from "react-router-dom";
+import EditCoche from "./EditCoche";
 export default class HomeComponent extends Component {
   service = new ServiceCoches();
   state = {
@@ -8,7 +9,7 @@ export default class HomeComponent extends Component {
   };
 
   loadCoches = async () => {
-    let allCoches = awaitthis.service.getCoches();
+    let allCoches = await this.service.getCoches();
     this.setState({
       coches: allCoches,
     });
@@ -30,12 +31,14 @@ export default class HomeComponent extends Component {
                 <th className="px-6 py-4 font-semibold">Marca</th>
                 <th className="px-6 py-4 font-semibold">Modelo</th>
                 <th className="px-6 py-4">Conductor</th>
-                <th className="px-6 py-4"><img style={{width:'20px',height:'20px'}} src="" alt="" /></th>
+                <th className="px-6 py-4">ID</th>
+                <th className="px-6 py-4">Modify</th>
+                <th className="px-6 py-4">Delete</th>
               </tr>
             </thead>
 
             <tbody className="divide-y divide-blue-200">
-              {this.state.departamentos.map((departamento, index) => {
+              {this.state.coches.map((coche, index) => {
                 return (
                   <tr
                     key={index}
@@ -43,16 +46,16 @@ export default class HomeComponent extends Component {
                       index % 2 === 0 ? "bg-blue-100" : "bg-white"
                     }`}
                   >
-                    <td className="px-6 py-4 text-gray-800">
-                      {departamento.nombre}
-                    </td>
+                    <td className="px-6 py-4 text-gray-800">{coche.marca}</td>
 
+                    <td className="px-6 py-4 text-gray-800">{coche.modelo}</td>
                     <td className="px-6 py-4 text-gray-800">
-                      {departamento.localidad}
+                      {coche.conductor}
                     </td>
+                    <td className="px-6 py-4 text-gray-800">{coche.idCoche}</td>
 
-                    <td className="rounded-md bg-red-600 px-4 py-2 font-medium text-white transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400">
-                      <button>Edit</button>
+                    <td className="px-6 py-4">
+                      <button  className="rounded-md bg-yellow-600 px-4 py-2 font-medium text-black transition hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-300">Edit</button>
                     </td>
 
                     <td className="px-6 py-4">
@@ -65,6 +68,7 @@ export default class HomeComponent extends Component {
               })}
             </tbody>
           </table>
+          <EditCoche/>
         </div>
       </div>
     );
