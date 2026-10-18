@@ -27,19 +27,6 @@ export default class MenuComponent extends Component {
         >
           🏠 Home
         </NavLink>
-
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            `rounded-lg px-5 py-3 text-sm font-semibold transition-all duration-200 ${
-              isActive
-                ? "bg-blue-600 text-white shadow-md"
-                : "text-slate-300 hover:bg-slate-700 hover:text-white"
-            }`
-          }
-        >
-          🏢 Coches
-        </NavLink>
         <NavLink
           to="/create"
           className={({ isActive }) =>
@@ -52,18 +39,7 @@ export default class MenuComponent extends Component {
         >
           🏢 Create Coche
         </NavLink>
-        <NavLink
-          to="/edit"
-          className={({ isActive }) =>
-            `rounded-lg px-5 py-3 text-sm font-semibold transition-all duration-200 ${
-              isActive
-                ? "bg-blue-600 text-white shadow-md"
-                : "text-slate-300 hover:bg-slate-700 hover:text-white"
-            }`
-          }
-        >
-          🏢 Edit
-        </NavLink>
+        
 
       </nav>
     </div>

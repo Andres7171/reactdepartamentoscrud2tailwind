@@ -9,6 +9,17 @@ export default class ServiceCoches {
     return reponse.data;
   }
 
+  async deleteCoche(idCoche) {
+    let url = Global.urlCoches;
+    let request = "api/coches/deletecoche/" + idCoche;
+    try {
+      let response = await axios.delete(url + request);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async createCoche(coche) {
     let url = Global.urlCoches;
     let request = "api/coches/insertcoche";

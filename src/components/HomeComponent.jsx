@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import ServiceCoches from "../services/ServiceCoches";
 import { NavLink } from "react-router-dom";
 import EditCoche from "./EditCoche";
+import DeleteCoche from "./DeleteCoche";
 export default class HomeComponent extends Component {
   service = new ServiceCoches();
   state = {
     coches: [],
+    mostrarEdit:false,
+    mostrarDelete:false,
+    cocheSeleccionado:null
   };
 
   loadCoches = async () => {
@@ -15,6 +19,34 @@ export default class HomeComponent extends Component {
     });
   };
 
+  cambiarMostrarEdit=()=>{
+    this.setState({
+      mostrarEdit:!this.state.mostrarEdit
+    })
+  }
+
+  cambiarMostrarDelete=()=>{
+    this.setState({
+      mostrarDelete:!this.state.mostrarDelete
+    })
+  }
+
+  mostrarModalEdit=(coche)=>{
+    this.setState({
+      mostrarEdit:true,
+      cocheSeleccionado:coche,
+    })
+  }
+
+  mostrarModalDelete=(coche)=>{
+    this.setState({
+      mostrarDelete:true,
+      cocheSeleccionado:coche,
+    })
+  }
+
+
+
   componentDidMount = async () => {
     await this.loadCoches();
   };
@@ -23,6 +55,14 @@ export default class HomeComponent extends Component {
     return (
       <div>
         <h1>Home Component</h1>
+        {
+          this.state.mostrarEdit == true &&
+          (<EditCoche loadCoches={this.loadCoches} cambiarMostrarEdit={this.cambiarMostrarEdit} coche={this.state.cocheSeleccionado}/>)
+        }
+        {
+          this.state.mostrarDelete == true &&
+          (<DeleteCoche loadCoches={this.loadCoches} cambiarMostrarDelete={this.cambiarMostrarDelete} coche={this.state.cocheSeleccionado}/>)
+        }
 
         <div className="w-full overflow-x-auto rounded-lg shadow-lg">
           <table className="w-full border-collapse text-left text-sm">
@@ -55,11 +95,13 @@ export default class HomeComponent extends Component {
                     <td className="px-6 py-4 text-gray-800">{coche.idCoche}</td>
 
                     <td className="px-6 py-4">
-                      <button  className="rounded-md bg-yellow-600 px-4 py-2 font-medium text-black transition hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-300">Edit</button>
+                      <button onClick={()=>this.mostrarModalEdit(coche)}  className="rounded-md bg-yellow-300 px-4 py-2 font-medium text-black transition hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-300">
+                        Edit
+                      </button>
                     </td>
 
                     <td className="px-6 py-4">
-                      <button className="rounded-md bg-red-600 px-4 py-2 font-medium text-white transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400">
+                      <button onClick={()=>this.mostrarModalDelete(coche)} className="rounded-md bg-red-600 px-4 py-2 font-medium text-white transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400">
                         Delete
                       </button>
                     </td>
@@ -68,7 +110,6 @@ export default class HomeComponent extends Component {
               })}
             </tbody>
           </table>
-          <EditCoche/>
         </div>
       </div>
     );
